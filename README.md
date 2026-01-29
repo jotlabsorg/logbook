@@ -11,9 +11,10 @@ about a certain topic, and I want to find them quickly.
 
 # How to use
 
+![Logbook Plugin](./imgs/logbook.jpeg)
 - First you select the folder where you want to store your logbook data.
 
-![Logbook Plugin](./imgs/logbook.jpeg)
+![Logbook](./imgs/lbsave.jpeg)
 - Then when you click in save Save to Read. It will save the link in `todo-read-list.md` at the select folder.
 - When you click in Close & Archive it will close the tab and add to the `history.md`, so you can see later.
 - When you click Mark as Read it will create the file `read-<year>-<month>.md` and add the link there.
