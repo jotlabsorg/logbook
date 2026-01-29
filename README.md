@@ -33,8 +33,6 @@ Those are planned features:
 - [ ] Sync across devices, possibly using git and chrondb to store data.
 - [ ] Remove folder storage and use database (sqlite, chrondb)
 
-# Images
-
 # Installation
 
 To install the browser extension, follow these steps:
