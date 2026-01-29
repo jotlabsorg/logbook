@@ -1,0 +1,13 @@
+{:source-paths ["src"]
+ 
+ :dependencies [[reagent "1.2.0"]]
+ 
+ :builds
+ {:extension
+  {:target :browser
+   :output-dir "dist/js"
+   :asset-path "js"
+   :modules {:popup {:init-fn dev.jotlabs.logbook.popup/init
+                     :entries [dev.jotlabs.logbook.popup]}}
+   :release {:compiler-options {:optimizations :advanced}}
+   :devtools {:after-load dev.jotlabs.logbook.popup/init}}}}

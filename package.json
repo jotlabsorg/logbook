@@ -1,0 +1,22 @@
+{
+  "name": "logbook",
+  "version": "0.1.0",
+  "description": "Managing logbook easily",
+  "private": true,
+  "scripts": {
+    "dev": "npm run copy-resources && shadow-cljs watch extension",
+    "release": "shadow-cljs release extension",
+    "clean": "rm -rf dist/*",
+    "icons": "node scripts/generate-icons.js",
+    "build": "npm run clean && npm run icons && npm run copy-resources && npm run release",
+    "copy-resources": "mkdir -p dist/icons && cp resources/manifest.json dist/ && cp resources/popup.html dist/ && cp resources/icons/*.png dist/icons/"
+  },
+  "devDependencies": {
+    "shadow-cljs": "^2.27.1",
+    "sharp": "^0.33.5"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}

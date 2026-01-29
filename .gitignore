@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.shadow-cljs/
+
+# Editor
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Generated icons (keep SVGs, ignore PNGs)
+resources/icons/*.png
+
+.clj-kondo/.cache/*
+.lsp/.cache/*
