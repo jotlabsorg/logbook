@@ -36,6 +36,12 @@ Those are planned features:
 # Installation
 
 To install the browser extension, follow these steps:
+Download the release package from the releases page: [Releases](https://github.com/jotlabsorg/logbook/releases).
+Unzip the downloaded package to a folder on your computer.
+Open your browser's extension management page:
+- For Chrome: `chrome://extensions/`
+- Enable "Developer mode" using the toggle switch in the top right corner.
+- Click on "Load unpacked" and select the unzipped folder.
 
 
 # Install the dev branch.
