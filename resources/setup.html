@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logbook - Setup</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #0d1117;
+      --bg-secondary: #161b22;
+      --bg-tertiary: #21262d;
+      --border-color: #30363d;
+      --text-primary: #e6edf3;
+      --text-secondary: #8b949e;
+      --accent-blue: #58a6ff;
+      --accent-green: #3fb950;
+      --accent-purple: #a371f7;
+    }
+
+    body {
+      background: var(--bg-primary);
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-primary);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 420px;
+      padding: 40px;
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .description {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 24px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn:hover {
+      background: var(--bg-tertiary);
+      border-color: var(--text-secondary);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    .btn-icon {
+      width: 24px;
+      height: 24px;
+      background: var(--accent-purple);
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+    }
+
+    .status {
+      margin-top: 24px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      padding: 10px 14px;
+      border-radius: 6px;
+      display: none;
+    }
+
+    .status.visible {
+      display: block;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+    }
+
+    .status.success {
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+    }
+
+    .status.error {
+      border-color: #f85149;
+      color: #f85149;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">L</div>
+    <h1>Logbook Setup</h1>
+    <p class="description">
+      Select a folder where your reading list files will be stored.
+      After selecting, you can close this tab and use the extension popup.
+    </p>
+    <button class="btn" id="select-btn">
+      <span class="btn-icon">📁</span>
+      <span>Select Folder</span>
+    </button>
+    <div class="status" id="status"></div>
+  </div>
+
+  <script src="js/setup.js"></script>
+</body>
+</html>

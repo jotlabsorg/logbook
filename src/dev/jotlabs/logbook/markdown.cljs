@@ -77,46 +77,27 @@
   [date]
   (str "## " (format-date date) "\n"))
 
-(defn ensure-date-section
-  "Ensures the content has a section for the given date, returns updated content."
-  [content date]
-  (let [date-str (format-date date)
-        section-header (date-section-header date)]
-    (cond
-      ;; Empty file - add full header structure
-      (str/blank? content)
-      (str (todo-file-header) section-header)
-
-      ;; Section exists - return as is
-      (str/includes? content (str "## " date-str))
-      content
-
-      ;; Need to add new section - insert after main header
-      :else
-      (let [lines (str/split-lines content)
-            header-end (loop [i 0]
-                         (if (>= i (count lines))
-                           i
-                           (let [line (nth lines i)]
-                             (if (and (not (str/blank? line))
-                                      (not (str/starts-with? line "#")))
-                               i
-                               (recur (inc i))))))]
-        (str (str/join "\n" (take header-end lines))
-             (when (pos? header-end) "\n")
-             section-header
-             (when (< header-end (count lines))
-               (str "\n" (str/join "\n" (drop header-end lines)))))))))
-
 (defn add-entry-to-date-section
-  "Adds an entry under the appropriate date section."
+  "Adds an entry under the appropriate date section.
+   If the section exists, inserts the entry right after the section header.
+   If not, appends a new section at the end of the file."
   [content date entry]
   (let [date-str (format-date date)
-        section-marker (str "## " date-str)
-        content-with-section (ensure-date-section content date)]
-    (str/replace content-with-section
-                 section-marker
-                 (str section-marker "\n" entry))))
+        section-marker (str "## " date-str)]
+    (if (str/blank? content)
+      (str (todo-file-header) section-marker "\n" entry)
+      (let [lines (vec (str/split-lines content))
+            section-idx (first (keep-indexed
+                                (fn [i line]
+                                  (when (= (str/trim line) section-marker) i))
+                                lines))]
+        (if section-idx
+          (let [before (subvec lines 0 (inc section-idx))
+                after (subvec lines (inc section-idx))]
+            (str (str/join "\n" before) "\n"
+                 (str/trimr entry) "\n"
+                 (str/join "\n" after)))
+          (str (str/trimr content) "\n\n" section-marker "\n" entry))))))
 
 (defn ensure-file-header
   "Ensures a file has its header, returns updated content."

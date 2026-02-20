@@ -58,12 +58,21 @@
                           #(reject (.-error %))))))))))
 
 (defn request-directory!
-  "Prompts user to select a directory and saves the handle."
+  "Prompts user to select a directory and saves the handle.
+   Falls back to opening a setup tab when showDirectoryPicker
+   is unavailable (e.g. extension popups in Brave)."
   []
-  (-> (.showDirectoryPicker js/window #js {:mode "readwrite"})
-      (.then (fn [handle]
-               (-> (save-directory-handle! handle)
-                   (.then (fn [_] handle)))))))
+  (if (fn? (.-showDirectoryPicker js/window))
+    (-> (.showDirectoryPicker js/window #js {:mode "readwrite"})
+        (.then (fn [handle]
+                 (-> (save-directory-handle! handle)
+                     (.then (fn [_] handle))))))
+    (do
+      (.create js/chrome.tabs
+               #js {:url (.getURL js/chrome.runtime "setup.html")})
+      (js/Promise.reject
+       (doto (js/Error. "Opened setup page in a new tab")
+         (-> .-name (set! "AbortError")))))))
 
 (defn verify-permission
   "Verifies we have read/write permission on the directory handle."

@@ -9,7 +9,7 @@
     "clean": "rm -rf dist/*",
     "icons": "node scripts/generate-icons.js",
     "build": "npm run clean && npm run icons && npm run copy-resources && npm run release",
-    "copy-resources": "mkdir -p dist/icons && cp resources/manifest.json dist/ && cp resources/popup.html dist/ && cp resources/icons/*.png dist/icons/"
+    "copy-resources": "mkdir -p dist/icons dist/js && cp resources/manifest.json dist/ && cp resources/popup.html dist/ && cp resources/setup.html dist/ && cp resources/setup.js dist/js/ && cp resources/icons/*.png dist/icons/"
   },
   "devDependencies": {
     "shadow-cljs": "^2.27.1",
